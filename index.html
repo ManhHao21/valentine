@@ -19,20 +19,29 @@
   
   <div class="gallery">
   </div>
-
+  <div id="videoContainer">
+    <button onclick="toggleVideo()">Xem Video 🎥</button>
+    <video id="myVideo" controls style="display: none; margin-top: 10px;">
+        <source src="video.mp4" type="video/mp4">
+        Trình duyệt của bạn không hỗ trợ video.
+    </video>
+</div>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     let gallery = document.querySelector('.gallery');
     let music = document.getElementById("background-music");
-  
+    let videoContainer = document.getElementById("videoContainer");
+    let videoPlayer = document.getElementById("myVideo");
+    let textContainer = document.getElementById("hedlinecontainer");
+
     let backgrounds = ["img/anh1.jpg", "img/valentine.jpg","img/hihi.jpg","img/huhu.jpg","img/hunhun.jpg"];
     let currentBgIndex = 0;
-  
+
     function changeBackground() {
       document.body.style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
       currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
     }
-  
+
     function loadGallery() {
       gallery.innerHTML = "";
       for (let i = 1; i <= 45; i++) {
@@ -42,7 +51,7 @@
         gallery.appendChild(img);
       }
     }
-  
+
     function startMusic() {
       document.body.addEventListener("click", function () {
         if (music.paused) {
@@ -50,7 +59,7 @@
         }
       }, { once: true });
     }
-  
+
     function showTextLoop() {
       const lines = [
         "💖 Happy Valentine's Day của chúng mình 💖",
@@ -58,54 +67,67 @@
         "💞 Nhưng mà không sao, anh vẫn ở đây với em mà! Hehe, yêu em nhiều lắm, cục vàng của anh!",
         "💝 Chúc em một ngày Valentine tràn đầy niềm vui và hạnh phúc nhé! 💝"
       ];
-  
-      const container = document.getElementById("hedlinecontainer");
-      container.innerHTML = ""; // Xóa nội dung cũ trước khi hiển thị lại
-  
+
+      textContainer.innerHTML = ""; // Xóa nội dung cũ
+
       function showLine(index) {
-        if (index >= lines.length) {
-          setTimeout(() => {
-            showTextLoop(); // Khi hết dòng, lặp lại toàn bộ
-          }, 2000);
-          return;
-        }
-  
+        if (index >= lines.length) return;
         const lineDiv = document.createElement("div");
         lineDiv.classList.add("fade-in-line");
-        container.appendChild(lineDiv);
-  
+        textContainer.appendChild(lineDiv);
         const words = lines[index].split(" ");
         let wordIndex = 0;
-  
+
         function showWord() {
           if (wordIndex < words.length) {
             lineDiv.innerHTML += words[wordIndex] + " ";
             wordIndex++;
-            setTimeout(showWord, 200); // Hiện từng từ sau 200ms
+            setTimeout(showWord, 200);
           } else {
-            setTimeout(() => showLine(index + 1), 1000); // Chờ 1 giây trước khi hiển thị dòng tiếp theo
+            setTimeout(() => showLine(index + 1), 1000);
           }
         }
-  
-        showWord(); // Bắt đầu hiển thị từ đầu tiên của dòng hiện tại
+
+        showWord();
       }
-  
-      showLine(0); // Bắt đầu từ dòng đầu tiên
+
+      showLine(0);
     }
-  
+
     function startLoop() {
       loadGallery();
       showTextLoop();
     }
-  
+
     startMusic();
     startLoop();
-  
-    // Thay đổi background mỗi 10 giây
-    changeBackground();
+
     setInterval(changeBackground, 10000);
+
+    // ✅ Khi click vào button, tắt nhạc, ẩn ảnh, ẩn text và hiển thị danh sách video
+    function toggleVideo() {
+      music.pause(); // Tắt nhạc
+      music.currentTime = 0;
+
+      gallery.style.display = "none"; // Ẩn ảnh
+      textContainer.style.display = "none"; // Ẩn text
+
+      videoContainer.innerHTML = "<h2>Danh sách Video 🎥</h2>"; // Tiêu đề danh sách video
+
+      for (let i = 1; i <= 15; i++) {
+        let videoItem = document.createElement("video");
+        videoItem.src = `video/${i}.mp4`;
+        videoItem.controls = true;
+        videoItem.style.width = "80%";
+        videoItem.style.margin = "10px auto";
+        videoContainer.appendChild(videoItem);
+      }
+    }
+
+    document.querySelector("button").addEventListener("click", toggleVideo);
   });
-  </script>
+</script>
+
   
   <!-- Link Font chữ đẹp -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
