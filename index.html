@@ -49,15 +49,7 @@
         gallery.appendChild(img);
       }
     }
-
-    function startMusic() {
-      document.body.addEventListener("click", function () {
-        if (music.paused) {
-          music.play().catch(error => console.log("Không thể tự động phát nhạc:", error));
-        }
-      }, { once: true });
-    }
-
+    music.play().catch(error => console.log("Không thể tự động phát nhạc:", error));
     function showTextLoop() {
       const lines = [
         "💖 Happy Valentine's Day của chúng mình 💖",
