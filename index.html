@@ -50,13 +50,13 @@
       }
     }
 
-    function startMusic() {
-      document.body.addEventListener("click", function () {
-        if (music.paused) {
-          music.play().catch(error => console.log("Không thể tự động phát nhạc:", error));
-        }
-      }, { once: true });
-    }
+    // function startMusic() {
+    //   document.body.addEventListener("click", function () {
+    //     if (music.paused) {
+    //       music.play().catch(error => console.log("Không thể tự động phát nhạc:", error));
+    //     }
+    //   }, { once: true });
+    // }
 
     function showTextLoop() {
       const lines = [
