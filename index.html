@@ -11,7 +11,7 @@
 
   <div class="hedlinecontainer" id="hedlinecontainer" style="display: flex; flex-direction: column;"></div>
   <audio id="background-music" autoplay loop>
-    <source src="sound/sound.mp3" type="audio/mp3">
+    <source src="sound/sounaaad.mp3" type="audio/mp3">
     Trình duyệt của bạn không hỗ trợ phát nhạc.
   </audio>
   
@@ -42,7 +42,7 @@
 
     function loadGallery() {
       gallery.innerHTML = "";
-      for (let i = 1; i <= 45; i++) {
+      for (let i = 1; i <= 135; i++) {
         let img = document.createElement("img");
         img.src = `img/${i}.jpg`;
         img.alt = "Hun hun";
@@ -50,13 +50,13 @@
       }
     }
 
-    // function startMusic() {
-    //   document.body.addEventListener("click", function () {
-    //     if (music.paused) {
-    //       music.play().catch(error => console.log("Không thể tự động phát nhạc:", error));
-    //     }
-    //   }, { once: true });
-    // }
+    function startMusic() {
+      document.body.addEventListener("click", function () {
+        if (music.paused) {
+          music.play().catch(error => console.log("Không thể tự động phát nhạc:", error));
+        }
+      }, { once: true });
+    }
 
     function showTextLoop() {
       const lines = [
@@ -109,10 +109,11 @@
 
       gallery.style.display = "none"; // Ẩn ảnh
       textContainer.style.display = "none"; // Ẩn text
+      hedlinecontainer.style.display = "none"; // Ẩn text
 
       videoContainer.innerHTML = "<h2>Danh sách Video 🎥</h2>"; // Tiêu đề danh sách video
 
-      for (let i = 1; i <= 15; i++) {
+      for (let i = 1; i <= 22; i++) {
         let videoItem = document.createElement("video");
         videoItem.src = `video/${i}.mp4`;
         videoItem.controls = true;
